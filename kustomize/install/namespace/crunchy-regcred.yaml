@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJyZWdpc3RyeS5jcnVuY2h5ZGF0YS5jb20iOnsidXNlcm5hbWUiOiJob3N0aW5nQGFtcHJpb24ubmV0IiwicGFzc3dvcmQiOiJQdXNocGluLUtuaWNrZXJzLVNsYWNrZWQxIiwiYXV0aCI6ImFHOXpkR2x1WjBCaGJYQnlhVzl1TG01bGREcFFkWE5vY0dsdUxVdHVhV05yWlhKekxWTnNZV05yWldReCJ9fX0=
+kind: Secret
+metadata:
+  name: crunchy-regcred
+  namespace: postgres-operator
+type: kubernetes.io/dockerconfigjson

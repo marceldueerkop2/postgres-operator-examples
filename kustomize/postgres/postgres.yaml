@@ -1,11 +1,16 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: hippo
+  name: psql-rhsn-jfrog
+  namespace: postgres-cluster
   annotations:
     postgres-operator.crunchydata.com/autoCreateUserSchema: "true"
 spec:
-  postgresVersion: 17
+  shutdown: false
+  image: registry.crunchydata.com/crunchydata/crunchy-postgres:ubi9-16.8-2513
+  imagePullSecrets:
+    - name: crunchy-regcred
+  postgresVersion: 16
   users:
     - name: hippo
       databases:
@@ -13,19 +18,17 @@ spec:
   instances:
     - name: instance1
       dataVolumeClaimSpec:
+        storageClassName: "standard"
         accessModes:
         - "ReadWriteOnce"
         resources:
           requests:
             storage: 1Gi
-  backups:
-    pgbackrest:
-      repos:
-      - name: repo1
-        volume:
-          volumeClaimSpec:
-            accessModes:
-            - "ReadWriteOnce"
-            resources:
-              requests:
-                storage: 1Gi
+    - name: instance2
+      dataVolumeClaimSpec:
+        storageClassName: "standard"
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
